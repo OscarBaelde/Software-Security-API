@@ -5,13 +5,13 @@ let jwks = require("jwks-rsa");
 let mysql = require("mysql");
 
 const connection = mysql.createConnection({
-  host: "81.164.34.143",
-  user: "software_security",
-  password: "mm4PUZELEe*wr3^5*B1BpZ1h31b@#s",
-  database: "software_security",
+  host: process.env.DATABASE_IP,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_TABLE,
 });
 
-var port = process.env.PORT || 8080;
+var port = process.env.API_PORT;
 
 var jwtCheck = jwt({
   secret: jwks.expressJwtSecret({

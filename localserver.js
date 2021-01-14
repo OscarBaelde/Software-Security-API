@@ -6,13 +6,13 @@ var bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT;
 
 const connection = mysql.createConnection({
-  host: "192.168.0.149",
-  user: "software_security",
-  password: "mm4PUZELEe*wr3^5*B1BpZ1h31b@#s",
-  database: "software_security",
+  host: process.env.LOCAL_DATABASE_IP,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_TABLE,
 });
 connection.connect();
 var jwtCheck = jwt({
