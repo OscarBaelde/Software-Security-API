@@ -5,11 +5,14 @@ var jwks = require("jwks-rsa");
 var bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 var port = process.env.PORT;
 
 const connection = mysql.createConnection({
-  host: process.env.LOCAL_DATABASE_IP,
+  host: process.env.SERVER_DATABASE_IP,
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_TABLE,
@@ -22,7 +25,7 @@ var jwtCheck = jwt({
     jwksRequestsPerMinute: 5,
     jwksUri: "https://final-work.eu.auth0.com/.well-known/jwks.json",
   }),
-  audience: "http://localhost:3000",
+  audience: "https://api.essentialgp.org",
   issuer: "https://final-work.eu.auth0.com/",
   algorithms: ["RS256"],
 });
