@@ -43,6 +43,7 @@ app.post("/klachten", function (req, res) {
   let text = { klacht: req.body.text };
   connection.query(query, text, function (err, result) {
     if (err) res.send(err);
+    res.send(result);
   });
   res.send("Sucess");
 });
