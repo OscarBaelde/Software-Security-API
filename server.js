@@ -1,18 +1,24 @@
-let express = require("express");
-let app = express();
-let jwt = require("express-jwt");
-let jwks = require("jwks-rsa");
-let mysql = require("mysql");
+var express = require("express");
+var app = express();
+var jwt = require("express-jwt");
+var jwks = require("jwks-rsa");
+var bodyParser = require("body-parser");
+const cors = require("cors");
+const mysql = require("mysql");
+const dotenv = require("dotenv");
 
+dotenv.config();
+
+var port = process.env.API_PORT;
+
+console.log(port);
 const connection = mysql.createConnection({
-  host: process.env.DATABASE_IP,
+  host: process.env.SERVER_DATABASE_IP,
   user: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_TABLE,
 });
-
-var port = process.env.API_PORT;
-
+connection.connect();
 var jwtCheck = jwt({
   secret: jwks.expressJwtSecret({
     cache: true,
@@ -26,10 +32,19 @@ var jwtCheck = jwt({
 });
 
 app.use(jwtCheck);
+app.use(bodyParser.json());
+app.use(cors());
 
-app.post("/complaint", function (req, res) {
-  res.send("Secured Resource");
-  console.log("complaint posted");
+app.post("/klachten", function (req, res) {
+  console.log("ja");
+  console.log(req.body.text);
+
+  let query = "INSERT INTO klachten SET ?";
+  let text = { klacht: req.body.text };
+  connection.query(query, text, function (err, result) {
+    if (err) res.send(err);
+  });
+  res.send("Sucess");
 });
 
 app.listen(port);
