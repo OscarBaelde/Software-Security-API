@@ -31,9 +31,9 @@ var jwtCheck = jwt({
   algorithms: ["RS256"],
 });
 
+app.use(cors());
 app.use(jwtCheck);
 app.use(bodyParser.json());
-app.use(cors());
 
 app.post("/klachten", function (req, res) {
   console.log("ja");
