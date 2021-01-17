@@ -42,11 +42,13 @@ app.post("/klachten", function (req, res) {
   let query = "INSERT INTO klachten SET ?";
   let text = { klacht: req.body.text };
   if (text == "") res.send("String can't be empty");
-  connection.query(query, text, function (err, result) {
-    if (err) console.log(err);
-    console.log(result);
-  });
-  res.send("Sucess");
+  else {
+    connection.query(query, text, function (err, result) {
+      if (err) console.log(err);
+      console.log(result);
+    });
+    res.send("Sucess");
+  }
 });
 
 app.listen(port);
