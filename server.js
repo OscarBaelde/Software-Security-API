@@ -6,6 +6,8 @@ var bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+let csurf = require("csurf");
 
 dotenv.config();
 
