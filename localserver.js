@@ -6,6 +6,8 @@ var bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql");
 const dotenv = require("dotenv");
+let csurf = require("csurf");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 
@@ -30,9 +32,11 @@ var jwtCheck = jwt({
   algorithms: ["RS256"],
 });
 
+app.use(cors());
 app.use(jwtCheck);
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(csurf());
 
 app.post("/klachten", function (req, res) {
   console.log("ja");

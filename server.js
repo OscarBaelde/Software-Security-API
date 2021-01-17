@@ -34,6 +34,8 @@ var jwtCheck = jwt({
 app.use(cors());
 app.use(jwtCheck);
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(csurf());
 
 app.post("/klachten", function (req, res) {
   console.log("ja");
