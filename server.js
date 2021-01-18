@@ -37,7 +37,12 @@ app.use(cors());
 app.use(jwtCheck);
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(csurf());
+app.use(
+  csurf({
+    secure: true,
+    cookie: true,
+  })
+);
 
 app.post("/klachten", function (req, res) {
   console.log("ja");
@@ -53,6 +58,10 @@ app.post("/klachten", function (req, res) {
     });
     res.send("Sucess");
   }
+});
+
+app.get("/csrf", function (req, res) {
+  res.json({ csrfToken: req.csrfToken() });
 });
 
 app.listen(port);
