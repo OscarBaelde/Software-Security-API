@@ -60,7 +60,7 @@ app.post("/klachten", function (req, res) {
   }
 });
 
-app.get("/csrf", function (req, res) {
+app.post("/csrf", function (req, res) {
   res.json({ csrfToken: req.csrfToken() });
 });
 
