@@ -39,7 +39,6 @@ app.use(cookieParser());
 app.use(
   csurf({
     secure: true,
-    cookie: true,
   })
 );
 
