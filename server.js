@@ -36,12 +36,12 @@ var jwtCheck = jwt({
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(
+/*app.use(
   csurf({
     secure: true,
     cookie: true,
   })
-);
+);*/
 
 app.post("/klachten", jwtCheck, function (req, res) {
   console.log("ja");
@@ -59,8 +59,8 @@ app.post("/klachten", jwtCheck, function (req, res) {
   }
 });
 
-app.get("/csrf", function (req, res) {
+/*app.get("/csrf", function (req, res) {
   res.json({ csrfToken: req.csrfToken() });
-});
+});*/
 
 app.listen(port);
