@@ -59,6 +59,9 @@ app.post("/klachten", jwtCheck, function (req, res) {
   }
 });
 
+app.delete("/deletemyuser", function (req, res) {
+  console.log(req.body);
+});
 /*app.get("/csrf", function (req, res) {
   res.json({ csrfToken: req.csrfToken() });
 });*/

@@ -39,15 +39,15 @@ app.use(cookieParser());
 app.use(csurf());
 
 app.post("/klachten", function (req, res) {
-  console.log("ja");
-  console.log(req.body.text);
-  res.send("Sucess");
-
   let query = "INSERT INTO klachten SET ?";
   let text = { klacht: req.body.text };
   connection.query(query, text, function (err, result) {
     if (err) console.log(err);
   });
+  res.send("Sucess");
+});
+app.delete("/deletemyuser", function (req, res) {
+  console.log(req.body);
 });
 
 app.listen(port);
